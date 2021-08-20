@@ -53,9 +53,10 @@ namespace NT1000Gift
                     if (comboBox1.SelectedIndex == 0)
                     {
                         try { doc.LoadFromFile(files[L - 1]); }
-                        catch { }
+                        catch
                         {
-                            labelMessage.Text = "資料夾文件數量與更改列表不符";
+                            labelMessage.Text = "資料夾文件數量與更改列表不符:"+ files.Length.ToString();
+                            System.Windows.MessageBox.Show(L.ToString());
                             Status = false;
                         }
                     }
@@ -76,7 +77,8 @@ namespace NT1000Gift
                             {
                                 doc.Replace(key, dict[key], true, true);
                             }
-                            doc.SaveToFile(folderBrowserDialog1.SelectedPath + '\\' + dict.Values.First() + ".docx", FileFormat.Docx2013);
+                            doc.SaveToFile(folderBrowserDialog1.SelectedPath + '\\' + L.ToString()+"_"+ dict.Values.First() + ".docx", FileFormat.Docx2013);
+
                             status.Text = "更改成功";
                             doc.Close();
                         }

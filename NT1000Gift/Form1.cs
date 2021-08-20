@@ -29,7 +29,7 @@ namespace NT1000Gift
        
         private void changeButton_Click(object sender, EventArgs e)
         {            
-            IEnumerable lines = File.ReadLines(csv);
+            IEnumerable lines = File.ReadLines(csv, System.Text.Encoding.GetEncoding(950));
             int L = 0;
             Dictionary<string, string> dict = new Dictionary<string, string>();
             string[] keys = new string[0];
@@ -38,7 +38,7 @@ namespace NT1000Gift
             {                    
                 if(L == 0)
                 {
-                    keys = line.Split(','); 
+                    keys = line.Split(',');                   
                 }
               
                 if (L > 0)
@@ -78,6 +78,7 @@ namespace NT1000Gift
                             }
                             doc.SaveToFile(folderBrowserDialog1.SelectedPath + '\\' + dict.Values.First() + ".docx", FileFormat.Docx2013);
                             status.Text = "更改成功";
+                            doc.Close();
                         }
                         catch
                         {
